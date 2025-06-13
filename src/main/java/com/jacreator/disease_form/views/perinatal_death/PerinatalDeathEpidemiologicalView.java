@@ -11,35 +11,33 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 
-public class PerinatalDeathEpidemiologicalView extends VerticalLayout{
-private static final List<String> facilityData = Arrays.asList(
-        "Federal Medical Center", "Jabi Clinic"
-    );
+public class PerinatalDeathEpidemiologicalView extends VerticalLayout {
+  private static final List<String> facilityData = Arrays.asList(
+      "Federal Medical Center", "Jabi Clinic");
 
-    public PerinatalDeathEpidemiologicalView() {
-        setWidthFull();
-        add(buildForm());
-    }
+  public PerinatalDeathEpidemiologicalView() {
+    setWidthFull();
+    add(buildForm());
+  }
 
-    private FormLayout buildForm() {
-        FormLayout form = new FormLayout();
+  private FormLayout buildForm() {
+    FormLayout form = new FormLayout();
 
-        // Complete Address
-        TextField clientAddress = new TextField("Complete Address");
-        clientAddress.setPlaceholder("Enter Address");
+    // Complete Address
+    TextField clientAddress = new TextField("Complete Address");
+    clientAddress.setPlaceholder("Enter Address");
 
-        // Facility Type
-        ComboBox<String> facilityType = new ComboBox<>("Type");
-        facilityType.setItems(facilityData);
-        facilityType.setPlaceholder("Select Facility Type");
-        facilityType.setRequired(true);
+    // Facility Type
+    ComboBox<String> facilityType = new ComboBox<>("Type");
+    facilityType.setItems(facilityData);
+    facilityType.setPlaceholder("Select Facility Type");
+    facilityType.setRequired(true);
 
-        form.setResponsiveSteps(
-            new FormLayout.ResponsiveStep("0", 1),
-            new FormLayout.ResponsiveStep("600px", 2)
-        );
-        form.add(clientAddress, facilityType);
+    form.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2));
+    form.add(clientAddress, facilityType);
 
-        return form;
-    }
+    return form;
+  }
 }
