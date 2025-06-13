@@ -9,78 +9,78 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
 
 public class YellowFeverClinicalHistoryView extends VerticalLayout {
-public YellowFeverClinicalHistoryView() {
-        setWidthFull();
-        
-        add(buildForm());
-    }
+  public YellowFeverClinicalHistoryView() {
+    setWidthFull();
 
-    private FormLayout buildForm() {
-        FormLayout form = new FormLayout();
+    add(buildForm());
+  }
 
-        // Fever (≥38 °C)
-        RadioButtonGroup<String> fever = new RadioButtonGroup<>();
-        fever.setLabel("Fever (≥38 °C)");
-        fever.setItems("Yes", "No", "Unknown");
-        fever.setRequired(true);
+  private FormLayout buildForm() {
+    FormLayout form = new FormLayout();
 
-        // Jaundice
-        RadioButtonGroup<String> jaundice = new RadioButtonGroup<>();
-        jaundice.setLabel("Jaundice");
-        jaundice.setItems("Yes", "No", "Unknown");
-        jaundice.setRequired(true);
+    // Fever (≥38 °C)
+    RadioButtonGroup<String> fever = new RadioButtonGroup<>();
+    fever.setLabel("Fever (≥38 °C)");
+    fever.setItems("Yes", "No", "Unknown");
+    fever.setRequired(true);
 
-        // General weakness
-        RadioButtonGroup<String> generalWeakness = new RadioButtonGroup<>();
-        generalWeakness.setLabel("General weakness");
-        generalWeakness.setItems("Yes", "No", "Unknown");
-        generalWeakness.setRequired(true);
+    // Jaundice
+    RadioButtonGroup<String> jaundice = new RadioButtonGroup<>();
+    jaundice.setLabel("Jaundice");
+    jaundice.setItems("Yes", "No", "Unknown");
+    jaundice.setRequired(true);
 
-        // Abdominal pain
-        RadioButtonGroup<String> abdominalPain = new RadioButtonGroup<>();
-        abdominalPain.setLabel("Abdominal pain");
-        abdominalPain.setItems("Yes", "No", "Unknown");
-        abdominalPain.setRequired(true);
+    // General weakness
+    RadioButtonGroup<String> generalWeakness = new RadioButtonGroup<>();
+    generalWeakness.setLabel("General weakness");
+    generalWeakness.setItems("Yes", "No", "Unknown");
+    generalWeakness.setRequired(true);
 
-        // Convulsion
-        RadioButtonGroup<String> convulsion = new RadioButtonGroup<>();
-        convulsion.setLabel("Convulsion");
-        convulsion.setItems("Yes", "No", "Unknown");
-        convulsion.setRequired(true);
+    // Abdominal pain
+    RadioButtonGroup<String> abdominalPain = new RadioButtonGroup<>();
+    abdominalPain.setLabel("Abdominal pain");
+    abdominalPain.setItems("Yes", "No", "Unknown");
+    abdominalPain.setRequired(true);
 
-        // Bleeding from nose, gums, skin or gastrointestinal tract
-        RadioButtonGroup<String> bleedingFromBodySites = new RadioButtonGroup<>();
-        bleedingFromBodySites.setLabel("Bleeding from nose, gums, skin or gastrointestinal tract");
-        bleedingFromBodySites.setItems("Yes", "No", "Unknown");
-        bleedingFromBodySites.setRequired(true);
+    // Convulsion
+    RadioButtonGroup<String> convulsion = new RadioButtonGroup<>();
+    convulsion.setLabel("Convulsion");
+    convulsion.setItems("Yes", "No", "Unknown");
+    convulsion.setRequired(true);
 
-        // Headache
-        RadioButtonGroup<String> headache = new RadioButtonGroup<>();
-        headache.setLabel("Headache");
-        headache.setItems("Yes", "No", "Unknown");
-        headache.setRequired(true);
+    // Bleeding from nose, gums, skin or gastrointestinal tract
+    RadioButtonGroup<String> bleedingFromBodySites = new RadioButtonGroup<>();
+    bleedingFromBodySites.setLabel("Bleeding from nose, gums, skin or gastrointestinal tract");
+    bleedingFromBodySites.setItems("Yes", "No", "Unknown");
+    bleedingFromBodySites.setRequired(true);
 
-        // Vomiting
-        RadioButtonGroup<String> vomiting = new RadioButtonGroup<>();
-        vomiting.setLabel("Vomiting");
-        vomiting.setItems("Yes", "No", "Unknown");
-        vomiting.setRequired(true);
+    // Headache
+    RadioButtonGroup<String> headache = new RadioButtonGroup<>();
+    headache.setLabel("Headache");
+    headache.setItems("Yes", "No", "Unknown");
+    headache.setRequired(true);
 
-        // Other symptoms, please specify
-        TextField otherSymptoms = new TextField("Other symptoms, please specify");
-        otherSymptoms.setPlaceholder("Other symptoms");
+    // Vomiting
+    RadioButtonGroup<String> vomiting = new RadioButtonGroup<>();
+    vomiting.setLabel("Vomiting");
+    vomiting.setItems("Yes", "No", "Unknown");
+    vomiting.setRequired(true);
 
-        // Date of symptom onset
-        DatePicker dateOfOnset = new DatePicker("Date of symptom onset");
-        dateOfOnset.setMax(LocalDate.now());
-        dateOfOnset.setRequired(true);
+    // Other symptoms, please specify
+    TextField otherSymptoms = new TextField("Other symptoms, please specify");
+    otherSymptoms.setPlaceholder("Other symptoms");
 
-        // Add all fields to the form
-        form.add(fever, jaundice, generalWeakness);
-        form.add(abdominalPain, convulsion, bleedingFromBodySites);
-        form.add(headache, vomiting, otherSymptoms);
-        form.add(dateOfOnset);
+    // Date of symptom onset
+    DatePicker dateOfOnset = new DatePicker("Date of symptom onset");
+    dateOfOnset.setMax(LocalDate.now());
+    dateOfOnset.setRequired(true);
 
-        return form;
-    }
+    // Add all fields to the form
+    form.add(fever, jaundice, generalWeakness);
+    form.add(abdominalPain, convulsion, bleedingFromBodySites);
+    form.add(headache, vomiting, otherSymptoms);
+    form.add(dateOfOnset);
+
+    return form;
+  }
 }

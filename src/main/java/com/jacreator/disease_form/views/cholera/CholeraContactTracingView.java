@@ -10,7 +10,8 @@ import com.vaadin.flow.component.textfield.TextField;
 public class CholeraContactTracingView extends VerticalLayout {
   public CholeraContactTracingView() {
     setWidthFull();
-
+    setPadding(true);
+    setSpacing(true);
     add(buildForm());
   }
 

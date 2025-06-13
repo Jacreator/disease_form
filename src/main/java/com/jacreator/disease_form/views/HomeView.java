@@ -1,5 +1,7 @@
 package com.jacreator.disease_form.views;
 
+import com.vaadin.flow.theme.lumo.LumoUtility;
+
 import com.jacreator.disease_form.views.afp.AFPView;
 import com.jacreator.disease_form.views.afp.ClinicalHistoryView;
 import com.jacreator.disease_form.views.afp.EpidemiologicalView;
@@ -120,36 +122,21 @@ import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.checkerframework.checker.units.qual.A;
-
 @Route("")
 public class HomeView extends VerticalLayout {
 
   private final ComboBox<String> diseaseCombo;
-  private final FormLayout patientForm;
   private final Map<String, VerticalLayout> diseaseComponents = new HashMap<>();
   private final Accordion accordion;
-  private final AFPView afpView = new AFPView();
 
   public HomeView() {
-Div outer = new Div();
-    outer.addClassNames("container", "d-flex", "justify-content-center", "align-items-center");
-    outer.getStyle().set("height", "100vh");
-
-    // Inner content wrapper for max width
-    Div inner = new Div();
-    inner.addClassNames("w-100", "col-lg-8", "p-4", "bg-white", "rounded", "shadow" + "d-flex", "flex-column", "justify-content-center", "align-items-center");
     setWidthFull();
     // Disease selection
     diseaseCombo = new ComboBox<>("Disease name");
@@ -159,95 +146,19 @@ Div outer = new Div();
         "Influenza", "Guinea Worm", "Ebola", "Diphtheria", "Dengue", "CSM", "Covid19", "Buruli Ulcer");
     diseaseCombo.setClearButtonVisible(true);
 
-    // Patient Information Form
-    patientForm = new FormLayout();
-    TextField cardNumber = new TextField("Card Number");
-    cardNumber.setRequired(true);
-
-    RadioButtonGroup<String> diseaseRadio = new RadioButtonGroup<>();
-    diseaseRadio.setLabel("Disease");
-    diseaseRadio.setItems("Diphtheria", "Other");
-
-    TextField firstName = new TextField("First name");
-    firstName.setRequired(true);
-
-    TextField middleName = new TextField("Middle name");
-    TextField lastName = new TextField("Last name");
-    lastName.setRequired(true);
-
-    ComboBox<String> stateOfResidence = new ComboBox<>("State of residence");
-    stateOfResidence.setItems("FCT", "Enugu");
-    stateOfResidence.setRequired(true);
-
-    ComboBox<String> lgaOfResidence = new ComboBox<>("LGA of residence");
-    lgaOfResidence.setRequired(true);
-
-    // Update LGA options based on state
-    stateOfResidence.addValueChangeListener(e -> {
-      if ("FCT".equals(e.getValue())) {
-        lgaOfResidence.setItems("AMAC", "Bwari", "Kwali");
-      } else if ("Enugu".equals(e.getValue())) {
-        lgaOfResidence.setItems("Nsukka", "Enugu south", "Udi");
-      } else {
-        lgaOfResidence.clear();
-      }
-    });
-
-    TextField wardOfResidence = new TextField("Ward of residence");
-    wardOfResidence.setRequired(true);
-
-    TextField address = new TextField("Patient’s residential address");
-    RadioButtonGroup<String> treatmentCenter = new RadioButtonGroup<>();
-    treatmentCenter.setLabel("Name of treatment center/HF");
-    treatmentCenter.setItems("MMSH", "Other");
-
-    TextField dateOfBirth = new TextField("Date of birth");
-    dateOfBirth.setRequired(true);
-
-    TextField age = new TextField("Age (years)");
-    age.setReadOnly(true);
-
-    RadioButtonGroup<String> sex = new RadioButtonGroup<>();
-    sex.setLabel("Sex");
-    sex.setItems("Female", "Male");
-    sex.setRequired(true);
-
-    TextField dateOfOnset = new TextField("Date of onset");
-    dateOfOnset.setRequired(true);
-
-    // Add fields to form
-    patientForm.add(
-        cardNumber, diseaseRadio, firstName, middleName, lastName,
-        stateOfResidence, lgaOfResidence, wardOfResidence, address,
-        treatmentCenter, dateOfBirth, age, sex, dateOfOnset);
-
     // Accordion for Patient Info
     accordion = new Accordion();
-    AccordionPanel patientPanel = accordion.add("Patient Information", patientForm);
-
-    // Disease-specific sections (for non-AFP diseases)
-    for (String disease : diseaseCombo.getListDataView().getItems().toList()) {
-      if (!"AFP".equals(disease)) {
-        VerticalLayout diseaseSection = new VerticalLayout();
-        diseaseSection.add(new TextField(disease + " details (to implement)"));
-        diseaseComponents.put(disease, diseaseSection);
-      }
-    }
 
     // Add components to the layout
-    inner.add(diseaseCombo, accordion);
-    add(outer);
-    outer.add(inner);
+    add(diseaseCombo, accordion);
 
     // Show disease-specific section on selection
     diseaseCombo.addValueChangeListener(e -> {
-      // Remove AFPView if it was previously added
-      remove(afpView);
-
       // Remove all panels and re-add patient info
       accordion.close();
       accordion.getChildren().forEach(component -> accordion.remove((AccordionPanel) component));
-      accordion.add("Patient Information", patientForm);
+      accordion.add("Reporting Areas", new ReportingAreasView());
+      accordion.add("Patient Information", new PatientView());
 
       String selectedDisease = e.getValue();
       if (selectedDisease == null) {
@@ -411,20 +322,36 @@ Div outer = new Div();
           break;
         default:
           if (diseaseComponents.containsKey(selectedDisease)) {
-        accordion.add(selectedDisease + " Section", diseaseComponents.get(selectedDisease));
+            accordion.add(selectedDisease + " Section", diseaseComponents.get(selectedDisease));
           }
           break;
       }
     });
 
     // Submit button
-    Button submit = new Button("Submit", event -> {
+    Button submit = new Button("Submit Case", event -> {
       Notification.show("Form submitted!");
       // Here, collect and process form data as needed
     });
-    submit.getElement().getClassList().add("btn");
-    submit.getElement().getClassList().add("btn-primary");
-    submit.getElement().getClassList().add("mt-4");
-    inner.add(submit);
+
+    diseaseCombo.getStyle().set("width", "100%");
+    diseaseCombo.getStyle().set("max-width", "800px");
+    diseaseCombo.getStyle().set("margin-left", "auto");
+    diseaseCombo.getStyle().set("margin-right", "auto");
+    diseaseCombo.getStyle().set("padding-left", "40px");
+    diseaseCombo.getStyle().set("padding-right", "40px");
+
+    accordion.getStyle().set("width", "100%");
+    accordion.getStyle().set("max-width", "800px");
+    accordion.getStyle().set("margin-right", "auto");
+    accordion.getStyle().set("margin-left", "auto");
+    accordion.getStyle().set("padding-left", "40px");
+    accordion.getStyle().set("padding-right", "40px");
+
+    submit.getStyle().set("margin-left", "auto");
+    submit.getStyle().set("margin-right", "auto");
+
+    // Add the form and submit button to the layout
+    add(diseaseCombo, accordion, submit);
   }
 }
