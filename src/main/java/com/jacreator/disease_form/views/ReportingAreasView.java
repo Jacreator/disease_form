@@ -17,7 +17,7 @@ public class ReportingAreasView extends VerticalLayout {
   private final List<String> fctLgas = Arrays.asList("AMAC", "Bwari", "Kwali");
   private final List<String> enuguLgas = Arrays.asList("Nsukka", "Enugu south", "Udi");
   private final List<String> healthFacilities = Arrays.asList("Federal Medical Center", "Jabi Clinic");
-  private final List<String> place = Arrays.asList("Health Facility, General Hospital, School");
+  private final List<String> place = Arrays.asList("Health Facility", "General Hospital", "School");
   private final List<String> notifiedList = Arrays.asList("Focal Person, DSNO");
 
   public ReportingAreasView() {

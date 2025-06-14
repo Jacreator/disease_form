@@ -80,7 +80,6 @@ private TextField contactFirstName;
         contactAgeMonths.setPlaceholder("Estimated Months");
         contactAgeMonths.setPattern("\\d*");
 
-
         contactSex = new RadioButtonGroup<>("Contact sex");
         contactSex.setItems("male", "female");
         contactSex.setRequired(true);
