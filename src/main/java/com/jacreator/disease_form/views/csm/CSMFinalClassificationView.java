@@ -18,8 +18,9 @@ private RadioButtonGroup<String> finalClassification;
         FormLayout form = new FormLayout();
         form.setWidthFull();
         form.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("0", 1)
-        );
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
 
         finalClassification = new RadioButtonGroup<>("Final classification");
         finalClassification.setItems(

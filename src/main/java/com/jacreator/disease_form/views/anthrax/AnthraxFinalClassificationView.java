@@ -30,7 +30,10 @@ public class AnthraxFinalClassificationView extends VerticalLayout {
     finalClassification.setPlaceholder("Select Option");
     finalClassification.setClearButtonVisible(true);
 
-
+    formLayout.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
     formLayout.add(finalClassification);
 
     return formLayout;

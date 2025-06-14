@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -49,10 +46,7 @@ public class EbolaEpidemiologicalView extends VerticalLayout{
     private FormLayout buildForm() {
         FormLayout form = new FormLayout();
         form.setWidthFull();
-        form.setResponsiveSteps(
-            new FormLayout.ResponsiveStep("0", 1),
-            new FormLayout.ResponsiveStep("600px", 2)
-        );
+        
 
         // 1. Did the patient travel during or after illness?
         patientTravelIllness = new RadioButtonGroup<>("Did the patient travel during or after illness?");
@@ -178,6 +172,10 @@ public class EbolaEpidemiologicalView extends VerticalLayout{
             formValues.put("caseAdmission", e.getValue());
         });
 
+        form.setResponsiveSteps(
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
         // Add all components to the form
         form.add(
             patientTravelIllness, travelAddress,

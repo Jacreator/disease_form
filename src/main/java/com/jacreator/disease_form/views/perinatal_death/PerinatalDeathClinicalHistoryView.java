@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -299,10 +296,9 @@ public class PerinatalDeathClinicalHistoryView extends VerticalLayout{
 
         // Add all fields to the form
         form.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("0", 1),
-                new FormLayout.ResponsiveStep("600px", 2),
-                new FormLayout.ResponsiveStep("900px", 3)
-        );
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
         form.add(
                 datePatientDied, primaryCauseOfDeath, secondaryCauseOfDeath, otherCausesOfDeathSpecify,
                 classificationOfPerinatalDeath, birthWeightInGrams, gestationAtBirthInWeeks, dateOfBirth,

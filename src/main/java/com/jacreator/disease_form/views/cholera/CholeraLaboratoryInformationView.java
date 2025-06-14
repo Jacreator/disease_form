@@ -109,6 +109,10 @@ private final List<String> laboratoryData = Arrays.asList(
             rectalSwabFields.setVisible(selected.contains("Rectal swab"));
         });
 
+        form.setResponsiveSteps(
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
         // Add all fields to the form
         form.add(specimenCollected, dateSpecimenCollected, specimenType);
         form.add(nameOfTestingLaboratory, dateSpecimenSent, rdtResult);

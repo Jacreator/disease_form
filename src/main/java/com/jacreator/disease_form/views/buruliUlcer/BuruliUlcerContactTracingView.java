@@ -19,6 +19,10 @@ public BuruliUlcerContactTracingView() {
         clientAddress.setPlaceholder("Enter Address");
         clientAddress.setRequired(true);
 
+        form.setResponsiveSteps(
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
         // Add field to the form
         form.add(clientAddress);
 

@@ -24,6 +24,10 @@ private RadioButtonGroup<String> finalClassification;
         finalClassification.setRequired(true);
         finalClassification.setRequiredIndicatorVisible(true);
 
+        form.setResponsiveSteps(
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
         form.add(finalClassification);
 
         return form;

@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -69,10 +66,9 @@ private static final List<String> testingLaboratoryData = Arrays.asList(
         FormLayout form = new FormLayout();
         form.setWidthFull();
         form.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("0", 1),
-                new FormLayout.ResponsiveStep("900px", 2),
-                new FormLayout.ResponsiveStep("1200px", 3)
-        );
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
 
         specimenCollected = createRadioGroup("Specimen collected", true, "yes", "no");
         dateSpecimenCollected = new DatePicker("Date specimen collected");

@@ -61,6 +61,10 @@ public class YewClinicalHistoryView extends VerticalLayout {
     TextField others = new TextField("Others (specify)");
     others.setPlaceholder("Other (specify)");
 
+    form.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
     // Add all fields to the form
     form.add(clinicalForms, photographUpload, treatmentGiven, drugsGiven, others);
 

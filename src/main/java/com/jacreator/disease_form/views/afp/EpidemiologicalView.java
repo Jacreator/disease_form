@@ -1,7 +1,5 @@
 package com.jacreator.disease_form.views.afp;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -10,7 +8,6 @@ import com.vaadin.flow.component.textfield.TextField;
 
 public class EpidemiologicalView extends VerticalLayout {
   public EpidemiologicalView() {
-    Accordion accordion = new Accordion();
     FormLayout form = new FormLayout();
 
     RadioButtonGroup<String> polioVaccineStatus = new RadioButtonGroup<>();
@@ -52,6 +49,10 @@ public class EpidemiologicalView extends VerticalLayout {
     TextField helpHistory3 = new TextField("Where has the child been seeking help for this problem (3)");
     DatePicker helpHistoryDate3 = new DatePicker("Date (3)");
 
+    form.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
     form.add(
         polioVaccineStatus, numberOfDoses, vaccinationHistory, opvRiNumber, opvSiaNumber,
         ipvRiNumber, ipvSiaNumber, ipvDoseDate, opvDoseDate,

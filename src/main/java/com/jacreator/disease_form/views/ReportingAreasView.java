@@ -17,6 +17,8 @@ public class ReportingAreasView extends VerticalLayout {
   private final List<String> fctLgas = Arrays.asList("AMAC", "Bwari", "Kwali");
   private final List<String> enuguLgas = Arrays.asList("Nsukka", "Enugu south", "Udi");
   private final List<String> healthFacilities = Arrays.asList("Federal Medical Center", "Jabi Clinic");
+  private final List<String> place = Arrays.asList("Health Facility, General Hospital, School");
+  private final List<String> notifiedList = Arrays.asList("Focal Person, DSNO");
 
   public ReportingAreasView() {
     setWidthFull();
@@ -57,6 +59,15 @@ public class ReportingAreasView extends VerticalLayout {
     stateOfResidence.setItems(stateData);
     stateOfResidence.setRequired(true);
 
+    // Place of Detection
+    ComboBox<String> placeOfDetection = new ComboBox<>("Place of Detection");
+    placeOfDetection.setItems(place);
+    placeOfDetection.setRequired(true);
+
+    ComboBox<String> notifiedBy = new ComboBox<>("Notified By");
+    notifiedBy.setItems(notifiedList);
+    notifiedBy.setRequired(true);
+
     // health facility
     ComboBox<String> healthFacility = new ComboBox<>("Health Facility");
     healthFacility.setItems(healthFacilities);
@@ -96,11 +107,13 @@ public class ReportingAreasView extends VerticalLayout {
 
     form.setResponsiveSteps(
         new FormLayout.ResponsiveStep("0", 1),
-        new FormLayout.ResponsiveStep("600px", 2));
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
 
     form.add(dateResultAvailable, stateOfResidence,
-        lgaOfResidence, dateOfInvestigation,
-        dateOfNotice, healthFacility, wardOfReporting);
+        lgaOfResidence, wardOfReporting,
+        placeOfDetection, healthFacility,
+        notifiedBy, dateOfNotice, dateOfInvestigation);
 
     return form;
   }

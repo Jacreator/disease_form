@@ -335,14 +335,14 @@ public class HomeView extends VerticalLayout {
     });
 
     diseaseCombo.getStyle().set("width", "100%");
-    diseaseCombo.getStyle().set("max-width", "800px");
+    diseaseCombo.getStyle().set("max-width", "900px");
     diseaseCombo.getStyle().set("margin-left", "auto");
     diseaseCombo.getStyle().set("margin-right", "auto");
     diseaseCombo.getStyle().set("padding-left", "40px");
     diseaseCombo.getStyle().set("padding-right", "40px");
 
     accordion.getStyle().set("width", "100%");
-    accordion.getStyle().set("max-width", "800px");
+    accordion.getStyle().set("max-width", "900px");
     accordion.getStyle().set("margin-right", "auto");
     accordion.getStyle().set("margin-left", "auto");
     accordion.getStyle().set("padding-left", "40px");

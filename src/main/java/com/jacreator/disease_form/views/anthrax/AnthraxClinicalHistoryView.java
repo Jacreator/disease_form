@@ -4,9 +4,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
+
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -79,6 +77,10 @@ public class AnthraxClinicalHistoryView extends VerticalLayout {
     // Name of sentinel lab specimen was sent
     TextField nameOfSentinelLabSpecimen = new TextField("Name of sentinel lab specimen was sent");
 
+    formLayout.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
     // Add all fields to the form
     formLayout.add(
         signsSymptoms, otherSymptoms,

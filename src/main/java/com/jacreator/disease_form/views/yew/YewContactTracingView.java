@@ -5,21 +5,25 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 
 public class YewContactTracingView extends VerticalLayout {
-public YewContactTracingView() {
-        setWidthFull();
-        add(buildForm());
-    }
+  public YewContactTracingView() {
+    setWidthFull();
+    add(buildForm());
+  }
 
-    private FormLayout buildForm() {
-        FormLayout form = new FormLayout();
+  private FormLayout buildForm() {
+    FormLayout form = new FormLayout();
 
-        // Complete Address
-        TextField clientAddress = new TextField("Complete Address");
-        clientAddress.setPlaceholder("Enter Address");
+    // Complete Address
+    TextField clientAddress = new TextField("Complete Address");
+    clientAddress.setPlaceholder("Enter Address");
 
-        // Add field to the form
-        form.add(clientAddress);
+    form.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
+    // Add field to the form
+    form.add(clientAddress);
 
-        return form;
-    }
+    return form;
+  }
 }

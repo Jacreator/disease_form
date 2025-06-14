@@ -67,6 +67,11 @@ public class DiphtheriaVitalSignsOnAdmission extends VerticalLayout {
     dateOfAdmission.setRequiredIndicatorVisible(true);
     dateOfAdmission.setMax(LocalDate.now());
 
+    form.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
+
     form.add(
         pulseOximetry,
         pulseRate,

@@ -7,9 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -61,10 +58,6 @@ public class EbolaLaboratoryInformationView extends VerticalLayout {
     private FormLayout buildForm() {
         FormLayout form = new FormLayout();
         form.setWidthFull();
-        form.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("0", 1),
-                new FormLayout.ResponsiveStep("600px", 2)
-        );
 
         // Specimen Collected?
         specimenCollected = new RadioButtonGroup<>("Specimen Collected?");
@@ -196,6 +189,10 @@ public class EbolaLaboratoryInformationView extends VerticalLayout {
             dateResultSentSerology.setVisible(showSerology);
         });
 
+        form.setResponsiveSteps(
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
         // Add all components to the form
         form.add(
                 specimenCollected, whySpecimenNotCollected,

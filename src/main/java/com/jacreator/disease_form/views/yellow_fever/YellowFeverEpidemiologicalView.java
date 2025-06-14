@@ -2,9 +2,6 @@ package com.jacreator.disease_form.views.yellow_fever;
 
 import java.time.LocalDate;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -73,6 +70,10 @@ public class YellowFeverEpidemiologicalView extends VerticalLayout {
     patientPresentCondition.setItems("Alive", "Dead", "Unknown");
     patientPresentCondition.setRequired(true);
 
+    form.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
     // Add all fields to the form
     form.add(vaccinationStatus, numberOfVaccineDose, dateOfVaccination, sourceVaccinationHistory);
     form.add(travelHistory, locationHistoryOfFever, patientPresentCondition);

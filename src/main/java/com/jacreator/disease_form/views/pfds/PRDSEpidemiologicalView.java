@@ -82,6 +82,11 @@ public class PRDSEpidemiologicalView extends VerticalLayout {
     outcome.setLabel("Outcome");
     outcome.setItems("Recovered", "Deceased", "Still Sick");
 
+    formLayout.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
+
     formLayout.add(
         investigationNumber,
         infectionConfirmed,

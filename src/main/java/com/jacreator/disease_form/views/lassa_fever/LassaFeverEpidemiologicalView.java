@@ -7,9 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -248,8 +245,8 @@ public class LassaFeverEpidemiologicalView extends VerticalLayout {
         // Responsive steps
         form.setResponsiveSteps(
             new FormLayout.ResponsiveStep("0", 1),
-            new FormLayout.ResponsiveStep("800px", 2)
-        );
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
 
         // Add all fields to the form
         form.add(

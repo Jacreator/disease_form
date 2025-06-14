@@ -1,7 +1,5 @@
 package com.jacreator.disease_form.views.afp;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -12,7 +10,6 @@ import com.vaadin.flow.component.textfield.TextField;
 
 public class LaboratoryInformationView extends VerticalLayout {
   public LaboratoryInformationView() {
-    Accordion accordion = new Accordion();
     FormLayout form = new FormLayout();
 
     RadioButtonGroup<String> specimenCollected = new RadioButtonGroup<>();
@@ -52,6 +49,11 @@ public class LaboratoryInformationView extends VerticalLayout {
 
     DatePicker dateResultAvailable = new DatePicker("Date of Result Available");
     DatePicker dateResultSent = new DatePicker("Date Result sent");
+
+    form.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
 
     form.add(
         specimenCollected, dateSpecimenCollected, specimenType, nameOfTestingLaboratory,

@@ -70,7 +70,10 @@ public class PatientView extends VerticalLayout{
 
     TextField dateOfOnset = new TextField("Date of onset");
     dateOfOnset.setRequired(true);
-
+    patientForm.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
     // Add fields to form
     patientForm.add(
         cardNumber, diseaseRadio, firstName, middleName, lastName,

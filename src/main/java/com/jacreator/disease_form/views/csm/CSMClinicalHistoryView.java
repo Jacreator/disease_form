@@ -2,9 +2,6 @@ package com.jacreator.disease_form.views.csm;
 
 import java.time.LocalDate;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -37,10 +34,9 @@ private RadioButtonGroup<String> fever;
         FormLayout form = new FormLayout();
         form.setWidthFull();
         form.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("0", 1),
-                new FormLayout.ResponsiveStep("800px", 2),
-                new FormLayout.ResponsiveStep("1200px", 3)
-        );
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
 
         fever = createRadioGroup("Fever (>=38C)", false);
         headache = createRadioGroup("Headache", true);

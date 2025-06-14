@@ -19,7 +19,10 @@ public class AnthraxContactTracingView extends VerticalLayout {
     // Complete address field
     TextField address = new TextField("Complete address");
     address.setPlaceholder("Enter Address");
-
+    formLayout.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
     formLayout.add(address);
 
     return formLayout;

@@ -65,7 +65,8 @@ public class MeaslesEpidemiologicalView extends VerticalLayout {
     // Responsive steps
     form.setResponsiveSteps(
         new FormLayout.ResponsiveStep("0", 1),
-        new FormLayout.ResponsiveStep("800px", 2));
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
 
     // Add all fields to the form
     form.add(

@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -104,7 +101,10 @@ private static final List<String> TESTING_LABORATORY_DATA = Arrays.asList(
             bloodFields.setVisible(selected.contains("Blood"));
             seraFields.setVisible(selected.contains("Sera"));
         });
-
+        form.setResponsiveSteps(
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
         // Add all fields to the form
         form.add(specimenCollected, dateSpecimenCollected, specimenType);
         form.add(dateSpecimenSent, nameOfTestingLaboratory);
@@ -277,6 +277,7 @@ private static final List<String> TESTING_LABORATORY_DATA = Arrays.asList(
             pcrFields.setVisible(selected.contains("PCR/RT-PCR"));
             prntFields.setVisible(selected.contains("PRNT"));
         });
+
 
         container.add(seraSpecimenReceived, dateSeraSpecimenReceived, specimenConditionSera, testConductedSera,
                 igmFields, iggAcuteFields, iggConvalescentFields, microscopyFields, pcrFields, prntFields, new Hr());

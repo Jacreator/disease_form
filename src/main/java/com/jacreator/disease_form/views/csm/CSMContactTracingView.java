@@ -7,9 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -53,10 +50,9 @@ private TextField contactFirstName;
         FormLayout form = new FormLayout();
         form.setWidthFull();
         form.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("0", 1),
-                new FormLayout.ResponsiveStep("800px", 2),
-                new FormLayout.ResponsiveStep("1200px", 3)
-        );
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
 
         contactFirstName = new TextField("Contact first name");
         contactFirstName.setPlaceholder("Enter First Name");
@@ -83,10 +79,7 @@ private TextField contactFirstName;
         contactAgeMonths = new TextField("Age (months)");
         contactAgeMonths.setPlaceholder("Estimated Months");
         contactAgeMonths.setPattern("\\d*");
-        contactAgeMonths.setEnabled(false); // as in your code
 
-        HorizontalLayout ageLayout = new HorizontalLayout(contactAgeYears, contactAgeMonths);
-        ageLayout.setDefaultVerticalComponentAlignment(Alignment.END);
 
         contactSex = new RadioButtonGroup<>("Contact sex");
         contactSex.setItems("male", "female");
@@ -133,7 +126,8 @@ private TextField contactFirstName;
                 contactFirstName,
                 contactLastName,
                 contactDateOfBirth,
-                ageLayout,
+                contactAgeYears,
+                contactAgeMonths,
                 contactSex,
                 contactStateOfResidence,
                 contactLgaOfResidence,

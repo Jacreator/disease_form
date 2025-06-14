@@ -111,6 +111,11 @@ public class AnthraxEpidemiologicalView extends VerticalLayout {
     humanExposures.setLabel("Human exposures in the 14 days before illness onset");
     humanExposures.setItems(yesNoUnknown);
 
+    formLayout.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
+
     // Add all fields to the form
     formLayout.add(
         vaccinatedWithAnthrax, nameOfVaccine, routeOfVaccineAdministration,

@@ -2,9 +2,6 @@ package com.jacreator.disease_form.views.ebola;
 
 import java.time.LocalDate;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -48,11 +45,6 @@ public class EbolaClinicalHistoryView extends VerticalLayout {
         form.setWidthFull();
 
         // Set responsive steps for 3-column layout on larger screens
-        form.setResponsiveSteps(
-            new FormLayout.ResponsiveStep("0", 1),
-            new FormLayout.ResponsiveStep("600px", 2),
-            new FormLayout.ResponsiveStep("900px", 3)
-        );
 
         // Date of Symptom Onset
         dateOfOnset = new DatePicker("Date of Symptom Onset");
@@ -191,6 +183,10 @@ public class EbolaClinicalHistoryView extends VerticalLayout {
         others.setRequired(true);
         others.setRequiredIndicatorVisible(true);
 
+        form.setResponsiveSteps(
+            new FormLayout.ResponsiveStep("0", 1),
+            new FormLayout.ResponsiveStep("600px", 2),
+            new FormLayout.ResponsiveStep("700px", 3));
         // Add all components to the form
         form.add(
             dateOfOnset,

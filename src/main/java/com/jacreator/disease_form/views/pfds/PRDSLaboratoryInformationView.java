@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -185,7 +182,7 @@ public class PRDSLaboratoryInformationView extends VerticalLayout {
     form.setResponsiveSteps(
         new FormLayout.ResponsiveStep("0", 1),
         new FormLayout.ResponsiveStep("600px", 2),
-        new FormLayout.ResponsiveStep("900px", 3));
+        new FormLayout.ResponsiveStep("700px", 3));
     form.add(
         specimenCollected, dateSpecimenCollected, specimenType, dateSpecimenSent,
         nameOfTestingLaboratory, labResultDivider,
