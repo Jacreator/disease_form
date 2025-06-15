@@ -29,6 +29,17 @@ public class YellowFeverContactTracingView extends VerticalLayout {
     }
   };
 
+  private Map<String, List<String>> wardData = new HashMap<String, List<String>>() {
+    {
+      put("AMAC", Arrays.asList("City Centre", "Garki", "Kabusa", "Wuse", "Gwarinpa"));
+      put("Bwari", Arrays.asList("Bwari Central", "Kuduru", "Igu", "Shere", "Kawu", "Ushafa"));
+      put("KUJE", Arrays.asList("Kuje", "Chibiri", "Gaube", "Kwaku"));
+      put("Nsukka", Arrays.asList("IBEKU", "ALOR-UNO", "EDE-UKWU", "EDE-NTA", "EDEM-ANI"));
+      put("Enugu South", Arrays.asList("Akwuke", "Amechi I", "Achara Layout East", "Achara Layout West"));
+      put("Udi", Arrays.asList("Oghu", "Affa", "Okpatu", "Awhum", "Ukana", "Abor"));
+    }
+  };
+
   public YellowFeverContactTracingView() {
     setWidthFull();
     add(buildForm());
@@ -57,9 +68,9 @@ public class YellowFeverContactTracingView extends VerticalLayout {
     contactAgeYears.setPlaceholder("Estimated Years");
     contactAgeYears.setRequired(true);
 
-    TextField contactAgeMonths = new TextField("Contact age (months)");
-    contactAgeMonths.setPlaceholder("Estimated Months");
-    contactAgeMonths.setEnabled(false); // As in your code
+    // TextField contactAgeMonths = new TextField("Contact age (months)");
+    // contactAgeMonths.setPlaceholder("Estimated Months");
+    // contactAgeMonths.setEnabled(false); // As in your code
 
     // Contact sex
     RadioButtonGroup<String> contactSex = new RadioButtonGroup<>();
@@ -87,8 +98,17 @@ public class YellowFeverContactTracingView extends VerticalLayout {
     contactStateOfResidence.addValueChangeListener(e -> {
       String selectedState = e.getValue();
       List<String> lgas = LGA_DATA.getOrDefault(selectedState, Collections.emptyList());
-      contactLgaOfResidence.setItems(lgas);
-      contactWardOfResidence.setItems(lgas); // Assuming wards are same as LGAs in your code
+      contactLgaOfResidence.setItems(lgas);// Assuming wards are same as LGAs in your code
+    });
+
+    contactLgaOfResidence.addValueChangeListener(e -> {
+      String lga = e.getValue();
+      if (lga != null && wardData.containsKey(lga)) {
+        contactWardOfResidence.setItems(wardData.get(lga));
+      } else {
+        contactWardOfResidence.clear();
+        contactWardOfResidence.setItems();
+      }
     });
 
     // Contact residential address
@@ -111,11 +131,23 @@ public class YellowFeverContactTracingView extends VerticalLayout {
 
         int years = period.getYears();
         int months = period.getMonths();
-        contactAgeYears.setValue(String.valueOf(years));
-        contactAgeMonths.setValue(String.valueOf(months));
+
+        StringBuilder ageText = new StringBuilder();
+        if (years > 0) {
+          ageText.append(years).append(" year").append(years > 1 ? "s" : "");
+        }
+        if (months > 0) {
+          if (ageText.length() > 0)
+            ageText.append(", ");
+          ageText.append(months).append(" month").append(months > 1 ? "s" : "");
+        }
+        if (ageText.length() == 0) {
+          ageText.append("Less than a month");
+        }
+
+        contactAgeYears.setValue(ageText.toString());
       } else {
         contactAgeYears.clear();
-        contactAgeMonths.clear();
       }
     });
 
@@ -125,7 +157,7 @@ public class YellowFeverContactTracingView extends VerticalLayout {
         new FormLayout.ResponsiveStep("700px", 3));
     // Add all fields to the form
     form.add(contactFirstName, contactLastName, contactDateOfBirth);
-    form.add(contactAgeYears, contactAgeMonths, contactSex);
+    form.add(contactAgeYears, contactSex);
     form.add(contactStateOfResidence, contactLgaOfResidence, contactWardOfResidence);
     form.add(contactResidentialAddress, relationshipWithCase);
 

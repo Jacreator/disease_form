@@ -28,12 +28,12 @@ public class ReportingAreasView extends VerticalLayout {
 
   private Map<String, List<String>> wardData = new HashMap<String, List<String>>() {
     {
-      put("AMAC", Arrays.asList("Ward 1", "Ward 2", "Ward 3"));
-      put("Bwari", Arrays.asList("Ward 4", "Ward 5"));
-      put("Kwali", Arrays.asList("Ward 6", "Ward 7"));
-      put("Nsukka", Arrays.asList("Ward 8", "Ward 9"));
-      put("Enugu South", Arrays.asList("Ward 10", "Ward 11"));
-      put("Udi", Arrays.asList("Ward 12", "Ward 13"));
+      put("AMAC", Arrays.asList("City Centre", "Garki", "Kabusa", "Wuse", "Gwarinpa"));
+      put("Bwari", Arrays.asList("Bwari Central", "Kuduru", "Igu", "Shere", "Kawu", "Ushafa"));
+      put("KUJE", Arrays.asList("Kuje", "Chibiri", "Gaube", "Kwaku"));
+      put("Nsukka", Arrays.asList("IBEKU", "ALOR-UNO", "EDE-UKWU", "EDE-NTA", "EDEM-ANI"));
+      put("Enugu South", Arrays.asList("Akwuke", "Amechi I", "Achara Layout East", "Achara Layout West"));
+      put("Udi", Arrays.asList("Oghu", "Affa", "Okpatu", "Awhum", "Ukana", "Abor"));
     }
   };
 

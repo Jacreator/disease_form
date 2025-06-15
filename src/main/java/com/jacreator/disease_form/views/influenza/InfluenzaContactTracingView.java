@@ -1,6 +1,7 @@
 package com.jacreator.disease_form.views.influenza;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -62,9 +63,9 @@ public class InfluenzaContactTracingView extends VerticalLayout {
     ageYears.setTooltipText("Estimated Years");
     ageYears.setRequired(true);
 
-    TextField ageMonths = new TextField("Estimated Months");
-    ageMonths.setPlaceholder("Estimated Months");
-    ageMonths.setTooltipText("Estimated Months");
+    // TextField ageMonths = new TextField("Estimated Months");
+    // ageMonths.setPlaceholder("Estimated Months");
+    // ageMonths.setTooltipText("Estimated Months");
 
     // Create a wrapper for the age field with label
 
@@ -101,6 +102,35 @@ public class InfluenzaContactTracingView extends VerticalLayout {
     TextField contactResidentialAddress = new TextField("Contact Residential Address");
     contactResidentialAddress.setPlaceholder("Enter Address");
 
+// Listener to calculate and set age
+    dateOfBirth.addValueChangeListener(event -> {
+      LocalDate dob = event.getValue();
+      if (dob != null) {
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(dob, today);
+
+        int years = period.getYears();
+        int months = period.getMonths();
+
+        StringBuilder ageText = new StringBuilder();
+        if (years > 0) {
+          ageText.append(years).append(" year").append(years > 1 ? "s" : "");
+        }
+        if (months > 0) {
+          if (ageText.length() > 0)
+            ageText.append(", ");
+          ageText.append(months).append(" month").append(months > 1 ? "s" : "");
+        }
+        if (ageText.length() == 0) {
+          ageText.append("Less than a month");
+        }
+
+        ageYears.setValue(ageText.toString());
+      } else {
+        ageYears.clear();
+      }
+    });
+
     // Responsive steps
     form.setResponsiveSteps(
         new FormLayout.ResponsiveStep("0", 1),
@@ -114,7 +144,6 @@ public class InfluenzaContactTracingView extends VerticalLayout {
         contactLastName,
         dateOfBirth,
         ageYears,
-        ageMonths,
         phone,
         contactStateOfResidence,
         contactLgaOfResidence,

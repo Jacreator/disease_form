@@ -81,8 +81,26 @@ public class PatientView extends VerticalLayout {
     dateOfBirth.addValueChangeListener(event -> {
       LocalDate dob = event.getValue();
       if (dob != null) {
-        int years = Period.between(dob, LocalDate.now()).getYears();
-        age.setValue(String.valueOf(years));
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(dob, today);
+
+        int years = period.getYears();
+        int months = period.getMonths();
+
+        StringBuilder ageText = new StringBuilder();
+        if (years > 0) {
+          ageText.append(years).append(" year").append(years > 1 ? "s" : "");
+        }
+        if (months > 0) {
+          if (ageText.length() > 0)
+            ageText.append(", ");
+          ageText.append(months).append(" month").append(months > 1 ? "s" : "");
+        }
+        if (ageText.length() == 0) {
+          ageText.append("Less than a month");
+        }
+
+        age.setValue(ageText.toString());
       } else {
         age.clear();
       }

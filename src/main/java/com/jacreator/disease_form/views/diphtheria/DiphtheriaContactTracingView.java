@@ -71,9 +71,9 @@ public class DiphtheriaContactTracingView extends VerticalLayout {
     ageYears.setRequiredIndicatorVisible(true);
     ageYears.setEnabled(false);
 
-    TextField ageMonths = new TextField("Contact Age (Months)");
-    ageMonths.setPlaceholder("Estimated Months");
-    ageMonths.setEnabled(false);
+    // TextField ageMonths = new TextField("Contact Age (Months)");
+    // ageMonths.setPlaceholder("Estimated Months");
+    // ageMonths.setEnabled(false);
 
     // Contact Sex
     RadioButtonGroup<String> contactSex = new RadioButtonGroup<>("Contact Sex");
@@ -125,11 +125,23 @@ public class DiphtheriaContactTracingView extends VerticalLayout {
 
         int years = period.getYears();
         int months = period.getMonths();
-        ageYears.setValue(String.valueOf(years));
-        ageMonths.setValue(String.valueOf(months));
+
+        StringBuilder ageText = new StringBuilder();
+        if (years > 0) {
+          ageText.append(years).append(" year").append(years > 1 ? "s" : "");
+        }
+        if (months > 0) {
+          if (ageText.length() > 0)
+            ageText.append(", ");
+          ageText.append(months).append(" month").append(months > 1 ? "s" : "");
+        }
+        if (ageText.length() == 0) {
+          ageText.append("Less than a month");
+        }
+
+        ageYears.setValue(ageText.toString());
       } else {
         ageYears.clear();
-        ageMonths.clear();
       }
     });
     // Add all components to the form
@@ -138,7 +150,6 @@ public class DiphtheriaContactTracingView extends VerticalLayout {
         contactLastName,
         dateOfBirth,
         ageYears,
-        ageMonths,
         contactSex,
         stateOfResidence,
         lgaOfResidence,
