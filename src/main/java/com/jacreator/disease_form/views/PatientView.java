@@ -1,6 +1,9 @@
 package com.jacreator.disease_form.views;
 
+import java.time.LocalDate;
+
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -20,9 +23,9 @@ public class PatientView extends VerticalLayout{
     TextField cardNumber = new TextField("Card Number");
     cardNumber.setRequired(true);
 
-    RadioButtonGroup<String> diseaseRadio = new RadioButtonGroup<>();
-    diseaseRadio.setLabel("Disease");
-    diseaseRadio.setItems("Diphtheria", "Other");
+    // RadioButtonGroup<String> diseaseRadio = new RadioButtonGroup<>();
+    // diseaseRadio.setLabel("Disease");
+    // diseaseRadio.setItems("Diphtheria", "Other");
 
     TextField firstName = new TextField("First name");
     firstName.setRequired(true);
@@ -57,7 +60,8 @@ public class PatientView extends VerticalLayout{
     treatmentCenter.setLabel("Name of treatment center/HF");
     treatmentCenter.setItems("MMSH", "Other");
 
-    TextField dateOfBirth = new TextField("Date of birth");
+    DatePicker dateOfBirth = new DatePicker("Date of birth");
+    dateOfBirth.setMax(LocalDate.now());
     dateOfBirth.setRequired(true);
 
     TextField age = new TextField("Age (years)");
@@ -68,15 +72,17 @@ public class PatientView extends VerticalLayout{
     sex.setItems("Female", "Male");
     sex.setRequired(true);
 
-    TextField dateOfOnset = new TextField("Date of onset");
+    DatePicker dateOfOnset = new DatePicker("Date of onset");
+    dateOfOnset.setMax(LocalDate.now());
     dateOfOnset.setRequired(true);
+
     patientForm.setResponsiveSteps(
         new FormLayout.ResponsiveStep("0", 1),
         new FormLayout.ResponsiveStep("600px", 2),
         new FormLayout.ResponsiveStep("700px", 3));
     // Add fields to form
     patientForm.add(
-        cardNumber, diseaseRadio, firstName, middleName, lastName,
+        cardNumber, firstName, middleName, lastName,
         stateOfResidence, lgaOfResidence, wardOfResidence, address,
         treatmentCenter, dateOfBirth, age, sex, dateOfOnset);
 
