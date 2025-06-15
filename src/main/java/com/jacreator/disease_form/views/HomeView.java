@@ -122,9 +122,14 @@ import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -138,19 +143,38 @@ public class HomeView extends VerticalLayout {
 
   public HomeView() {
     setWidthFull();
+
+    // Add beautiful title
+    H1 title = new H1("Create New Case");
+    title.addClassName("page-title");
+    add(title);
+
     // Disease selection
-    diseaseCombo = new ComboBox<>("Disease name");
+    diseaseCombo = new ComboBox<>("Select Disease");
     diseaseCombo.setItems(
         "Cholera", "Yellow Fever", "Yaw", "Anthrax", "AFP", "PRDS", "Tetanus", "Rubella",
         "Perinatal Death", "NOMA", "Mpox", "Measles", "Maternal Death", "Lassa Fever",
         "Influenza", "Guinea Worm", "Ebola", "Diphtheria", "Dengue", "CSM", "Covid19", "Buruli Ulcer");
     diseaseCombo.setClearButtonVisible(true);
 
+    // Alignment: Make ComboBox and Accordion the same width, max-width, margin, and padding
+    diseaseCombo.getStyle().set("width", "100%");
+    diseaseCombo.getStyle().set("max-width", "1000px");
+    diseaseCombo.getStyle().set("margin-left", "auto");
+    diseaseCombo.getStyle().set("margin-right", "auto");
+    diseaseCombo.getStyle().set("padding-left", "40px");
+    diseaseCombo.getStyle().set("padding-right", "40px");
+    diseaseCombo.addClassName("bootstrap-input");
+
     // Accordion for Patient Info
     accordion = new Accordion();
-
-    // Add components to the layout
-    add(diseaseCombo, accordion);
+    accordion.getStyle().set("width", "100%");
+    accordion.getStyle().set("max-width", "1000px");
+    accordion.getStyle().set("margin-left", "auto");
+    accordion.getStyle().set("margin-right", "auto");
+    accordion.getStyle().set("padding-left", "40px");
+    accordion.getStyle().set("padding-right", "40px");
+    accordion.addClassName("bootstrap-accordion");
 
     // Show disease-specific section on selection
     diseaseCombo.addValueChangeListener(e -> {
@@ -334,24 +358,24 @@ public class HomeView extends VerticalLayout {
       // Here, collect and process form data as needed
     });
 
-    diseaseCombo.getStyle().set("width", "100%");
-    diseaseCombo.getStyle().set("max-width", "900px");
-    diseaseCombo.getStyle().set("margin-left", "auto");
-    diseaseCombo.getStyle().set("margin-right", "auto");
-    diseaseCombo.getStyle().set("padding-left", "40px");
-    diseaseCombo.getStyle().set("padding-right", "40px");
+    // submit.getStyle().set("margin-left", "auto");
+    // submit.getStyle().set("margin-right", "auto");
+    submit.addClassName("blue-submit");
 
-    accordion.getStyle().set("width", "100%");
-    accordion.getStyle().set("max-width", "900px");
-    accordion.getStyle().set("margin-right", "auto");
-    accordion.getStyle().set("margin-left", "auto");
-    accordion.getStyle().set("padding-left", "40px");
-    accordion.getStyle().set("padding-right", "40px");
+    
 
-    submit.getStyle().set("margin-left", "auto");
-    submit.getStyle().set("margin-right", "auto");
+    setWidthFull();
+    setJustifyContentMode(JustifyContentMode.CENTER);
+    setAlignItems(Alignment.CENTER);
+    setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
-    // Add the form and submit button to the layout
-    add(diseaseCombo, accordion, submit);
+    
+    HorizontalLayout buttonLayout = new HorizontalLayout(submit);
+    buttonLayout.setWidthFull();
+    buttonLayout.setJustifyContentMode(JustifyContentMode.END);
+    buttonLayout.setPadding(false);
+    buttonLayout.setSpacing(false);
+
+    add(diseaseCombo, accordion, buttonLayout);
   }
 }
