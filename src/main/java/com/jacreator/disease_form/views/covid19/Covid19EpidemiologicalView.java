@@ -301,8 +301,7 @@ public class Covid19EpidemiologicalView extends VerticalLayout {
                 dateHospitalVisit,
                 addressHospitalVisited,
                 personOutcome,
-                dateOfDeathOutcome,
-                new Hr()
+                dateOfDeathOutcome
         );
         for (RadioButtonGroup<String> group : comorbidityGroups.values()) {
             form.add(group);

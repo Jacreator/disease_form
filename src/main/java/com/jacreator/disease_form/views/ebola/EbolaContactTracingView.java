@@ -1,6 +1,7 @@
 package com.jacreator.disease_form.views.ebola;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -65,6 +66,12 @@ public class EbolaContactTracingView extends VerticalLayout {
     lastName.setRequired(true);
     lastName.setRequiredIndicatorVisible(true);
 
+    // Phone Number
+    phone = new TextField("Phone Number");
+    phone.setRequired(true);
+    phone.setPlaceholder("Phone Number");
+    phone.setRequiredIndicatorVisible(true);
+
     // Date of Birth
     dateOfBirth = new DatePicker("Date of Birth");
     dateOfBirth.setMax(LocalDate.now());
@@ -72,20 +79,16 @@ public class EbolaContactTracingView extends VerticalLayout {
     dateOfBirth.setRequiredIndicatorVisible(true);
     dateOfBirth.setPlaceholder("YYYY-MM-DD");
 
-    // Phone Number
-    phone = new TextField("Phone Number");
-    phone.setRequired(true);
-    phone.setPlaceholder("Phone Number");
-    phone.setRequiredIndicatorVisible(true);
-
     // Age (Years and Months)
     ageYears = new TextField("Age (Years)");
     ageYears.setPlaceholder("Estimated Years");
     ageYears.setTooltipText("Estimated Years");
+    ageYears.setEnabled(false);
 
     ageMonths = new TextField("Age (Months)");
     ageMonths.setPlaceholder("Estimated Months");
     ageMonths.setTooltipText("Estimated Months");
+    ageMonths.setEnabled(false);
 
     // Create a wrapper for age with label
 
@@ -132,6 +135,23 @@ public class EbolaContactTracingView extends VerticalLayout {
     relationshipWithCase.setRequired(true);
     relationshipWithCase.setRequiredIndicatorVisible(true);
     relationshipWithCase.setClearButtonVisible(true);
+
+    // Listener to calculate and set age
+    dateOfBirth.addValueChangeListener(event -> {
+      LocalDate dob = event.getValue();
+      if (dob != null) {
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(dob, today);
+
+        int years = period.getYears();
+        int months = period.getMonths();
+        ageYears.setValue(String.valueOf(years));
+        ageMonths.setValue(String.valueOf(months));
+      } else {
+        ageYears.clear();
+        ageMonths.clear();
+      }
+    });
 
     // Add all components to the form
     form.add(

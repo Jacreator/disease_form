@@ -111,11 +111,11 @@ public class CholeraClinicalHistoryView extends VerticalLayout {
         new FormLayout.ResponsiveStep("600px", 2),
         new FormLayout.ResponsiveStep("700px", 3));
     // Add all fields to the form
-    form.add(dateOfSymptomOnset, diarrhea, myalgia);
-    form.add(restlessness, fever, abdominalCramp);
-    form.add(vomiting, thirst, dehydrated);
-    form.add(bloodInStool, otherSymptoms, patientAdmittedAtLeastOneNight);
-    form.add(datePatientAdmittedAtLeastOneNight, datePatientDischargedAtLeastOneNight);
+    form.add(dateOfSymptomOnset, diarrhea,
+        myalgia, restlessness, fever,
+        abdominalCramp, vomiting, thirst,
+        dehydrated, datePatientAdmittedAtLeastOneNight, datePatientDischargedAtLeastOneNight, bloodInStool,
+        patientAdmittedAtLeastOneNight, otherSymptoms);
 
     return form;
   }

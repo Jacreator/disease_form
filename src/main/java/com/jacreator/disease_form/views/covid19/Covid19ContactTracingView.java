@@ -9,58 +9,57 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
 
 public class Covid19ContactTracingView extends VerticalLayout {
-private TextField clientAddress;
-    private TextField contactName;
-    private TextField contactNumber;
-    private TextField contactType;
-    private RadioButtonGroup<String> contactCategory;
-    private DatePicker dateContact;
+  private TextField clientAddress;
+  private TextField contactName;
+  private TextField contactNumber;
+  private TextField contactType;
+  private RadioButtonGroup<String> contactCategory;
+  private DatePicker dateContact;
 
-    public Covid19ContactTracingView() {
-        setWidthFull();
-        setPadding(true);
-        setSpacing(true);
+  public Covid19ContactTracingView() {
+    setWidthFull();
+    setPadding(true);
+    setSpacing(true);
 
-        add(buildForm());
-    }
+    add(buildForm());
+  }
 
-    private FormLayout buildForm() {
-        FormLayout form = new FormLayout();
-        form.setWidthFull();
-        form.setResponsiveSteps(
-            new FormLayout.ResponsiveStep("0", 1),
-            new FormLayout.ResponsiveStep("600px", 2),
-            new FormLayout.ResponsiveStep("700px", 3));
+  private FormLayout buildForm() {
+    FormLayout form = new FormLayout();
+    form.setWidthFull();
+    form.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
 
-        clientAddress = new TextField("Complete Address");
-        clientAddress.setPlaceholder("Enter Address");
+    clientAddress = new TextField("Complete Address");
+    clientAddress.setPlaceholder("Enter Address");
 
-        contactName = new TextField("Contact Name");
-        contactName.setPlaceholder("text text");
+    contactName = new TextField("Contact Name");
+    contactName.setPlaceholder("Contact Name");
 
-        contactNumber = new TextField("Contact Number");
-        contactNumber.setPlaceholder("text text");
+    contactNumber = new TextField("Contact Number");
+    contactNumber.setPlaceholder("Contact Number");
 
-        contactType = new TextField("Type of Contact");
-        contactType.setPlaceholder("text text");
+    contactType = new TextField("Type of Contact");
+    contactType.setPlaceholder("Type of Contact");
 
-        contactCategory = new RadioButtonGroup<>("Contact Categorization");
-        contactCategory.setItems("high", "medium", "low");
-        contactCategory.setRequired(true);
-        contactCategory.setRequiredIndicatorVisible(true);
+    contactCategory = new RadioButtonGroup<>("Contact Categorization");
+    contactCategory.setItems("high", "medium", "low");
+    contactCategory.setRequired(true);
+    contactCategory.setRequiredIndicatorVisible(true);
 
-        dateContact = new DatePicker("Date of contact with a confirmed case");
-        dateContact.setMax(LocalDate.now());
+    dateContact = new DatePicker("Date of contact with a confirmed case");
+    dateContact.setMax(LocalDate.now());
 
-        form.add(
-                clientAddress,
-                contactName,
-                contactNumber,
-                contactType,
-                contactCategory,
-                dateContact
-        );
+    form.add(
+        clientAddress,
+        contactName,
+        contactNumber,
+        contactType,
+        contactCategory,
+        dateContact);
 
-        return form;
-    }
+    return form;
+  }
 }

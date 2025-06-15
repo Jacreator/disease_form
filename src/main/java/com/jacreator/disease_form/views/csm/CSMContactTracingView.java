@@ -1,6 +1,7 @@
 package com.jacreator.disease_form.views.csm;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,125 +17,143 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
 
 public class CSMContactTracingView extends VerticalLayout {
-private TextField contactFirstName;
-    private TextField contactLastName;
-    private DatePicker contactDateOfBirth;
-    private TextField contactAgeYears;
-    private TextField contactAgeMonths;
-    private RadioButtonGroup<String> contactSex;
-    private ComboBox<String> contactStateOfResidence;
-    private ComboBox<String> contactLgaOfResidence;
-    private ComboBox<String> contactWardOfResidence;
-    private TextField contactResidentialAddress;
-    private ComboBox<String> relationshipWithCase;
+  private TextField contactFirstName;
+  private TextField contactLastName;
+  private DatePicker contactDateOfBirth;
+  private TextField contactAgeYears;
+  private TextField contactAgeMonths;
+  private RadioButtonGroup<String> contactSex;
+  private ComboBox<String> contactStateOfResidence;
+  private ComboBox<String> contactLgaOfResidence;
+  private ComboBox<String> contactWardOfResidence;
+  private TextField contactResidentialAddress;
+  private ComboBox<String> relationshipWithCase;
 
-    private static final List<String> relationshipWithCaseData = Arrays.asList(
-            "Parent", "Sibling", "Child", "Neighbour", "Work/School Colleague",
-            "Healthcare giver", "Patient", "Others"
-    );
-    private static final List<String> stateData = Arrays.asList("FCT", "Enugu");
-    private static final Map<String, List<String>> lgaData = new HashMap<>() {{
-        put("FCT", Arrays.asList("AMAC", "Bwari", "Kwali"));
-        put("Enugu", Arrays.asList("Nsukka", "Enugu south", "Udi"));
-    }};
-
-    public CSMContactTracingView() {
-        setWidthFull();
-        setPadding(true);
-        setSpacing(true);
-
-        add(buildForm());
+  private static final List<String> relationshipWithCaseData = Arrays.asList(
+      "Parent", "Sibling", "Child", "Neighbour", "Work/School Colleague",
+      "Healthcare giver", "Patient", "Others");
+  private static final List<String> stateData = Arrays.asList("FCT", "Enugu");
+  private static final Map<String, List<String>> lgaData = new HashMap<>() {
+    {
+      put("FCT", Arrays.asList("AMAC", "Bwari", "Kwali"));
+      put("Enugu", Arrays.asList("Nsukka", "Enugu south", "Udi"));
     }
+  };
 
-    private FormLayout buildForm() {
-        FormLayout form = new FormLayout();
-        form.setWidthFull();
-        form.setResponsiveSteps(
-            new FormLayout.ResponsiveStep("0", 1),
-            new FormLayout.ResponsiveStep("600px", 2),
-            new FormLayout.ResponsiveStep("700px", 3));
+  public CSMContactTracingView() {
+    setWidthFull();
+    setPadding(true);
+    setSpacing(true);
 
-        contactFirstName = new TextField("Contact first name");
-        contactFirstName.setPlaceholder("Enter First Name");
-        contactFirstName.setRequired(true);
-        contactFirstName.setRequiredIndicatorVisible(true);
+    add(buildForm());
+  }
 
-        contactLastName = new TextField("Contact last name");
-        contactLastName.setPlaceholder("Enter Last Name");
-        contactLastName.setRequired(true);
-        contactLastName.setRequiredIndicatorVisible(true);
+  private FormLayout buildForm() {
+    FormLayout form = new FormLayout();
+    form.setWidthFull();
+    form.setResponsiveSteps(
+        new FormLayout.ResponsiveStep("0", 1),
+        new FormLayout.ResponsiveStep("600px", 2),
+        new FormLayout.ResponsiveStep("700px", 3));
 
-        contactDateOfBirth = new DatePicker("Date of birth");
-        contactDateOfBirth.setRequired(true);
-        contactDateOfBirth.setRequiredIndicatorVisible(true);
-        contactDateOfBirth.setMax(LocalDate.now());
+    contactFirstName = new TextField("Contact first name");
+    contactFirstName.setPlaceholder("Enter First Name");
+    contactFirstName.setRequired(true);
+    contactFirstName.setRequiredIndicatorVisible(true);
 
-        contactAgeYears = new TextField("Age (years)");
-        contactAgeYears.setPlaceholder("Estimated Years");
-        contactAgeYears.setRequired(true);
-        contactAgeYears.setRequiredIndicatorVisible(true);
-        contactAgeYears.setPattern("\\d*");
-        // contactAgeYears.setPreventInvalidInput(true); // Method not available in Vaadin TextField
+    contactLastName = new TextField("Contact last name");
+    contactLastName.setPlaceholder("Enter Last Name");
+    contactLastName.setRequired(true);
+    contactLastName.setRequiredIndicatorVisible(true);
 
-        contactAgeMonths = new TextField("Age (months)");
-        contactAgeMonths.setPlaceholder("Estimated Months");
-        contactAgeMonths.setPattern("\\d*");
+    contactDateOfBirth = new DatePicker("Date of birth");
+    contactDateOfBirth.setRequired(true);
+    contactDateOfBirth.setRequiredIndicatorVisible(true);
+    contactDateOfBirth.setMax(LocalDate.now());
 
-        contactSex = new RadioButtonGroup<>("Contact sex");
-        contactSex.setItems("male", "female");
-        contactSex.setRequired(true);
-        contactSex.setRequiredIndicatorVisible(true);
+    contactAgeYears = new TextField("Age (years)");
+    contactAgeYears.setPlaceholder("Estimated Years");
+    contactAgeYears.setRequired(true);
+    contactAgeYears.setRequiredIndicatorVisible(true);
+    contactAgeYears.setPattern("\\d*");
+    // contactAgeYears.setPreventInvalidInput(true); // Method not available in
+    // Vaadin TextField
 
-        contactStateOfResidence = new ComboBox<>("Contact state of residence");
-        contactStateOfResidence.setItems(stateData);
-        contactStateOfResidence.setPlaceholder("Select State");
-        contactStateOfResidence.setRequired(true);
-        contactStateOfResidence.setRequiredIndicatorVisible(true);
+    contactAgeMonths = new TextField("Age (months)");
+    contactAgeMonths.setPlaceholder("Estimated Months");
+    contactAgeMonths.setPattern("\\d*");
 
-        contactLgaOfResidence = new ComboBox<>("Contact LGA of residence");
-        contactLgaOfResidence.setPlaceholder("Select LGA");
-        contactLgaOfResidence.setRequired(true);
-        contactLgaOfResidence.setRequiredIndicatorVisible(true);
+    contactSex = new RadioButtonGroup<>("Contact sex");
+    contactSex.setItems("male", "female");
+    contactSex.setRequired(true);
+    contactSex.setRequiredIndicatorVisible(true);
 
-        contactWardOfResidence = new ComboBox<>("Contact ward of residence");
-        contactWardOfResidence.setPlaceholder("Select Ward");
-        contactWardOfResidence.setRequired(true);
-        contactWardOfResidence.setRequiredIndicatorVisible(true);
+    contactStateOfResidence = new ComboBox<>("Contact state of residence");
+    contactStateOfResidence.setItems(stateData);
+    contactStateOfResidence.setPlaceholder("Select State");
+    contactStateOfResidence.setRequired(true);
+    contactStateOfResidence.setRequiredIndicatorVisible(true);
 
-        contactStateOfResidence.addValueChangeListener(e -> {
-            String selectedState = e.getValue();
-            List<String> lgas = lgaData.getOrDefault(selectedState, Collections.emptyList());
-            contactLgaOfResidence.setItems(lgas);
-            contactWardOfResidence.setItems(lgas);
-            contactLgaOfResidence.clear();
-            contactWardOfResidence.clear();
-        });
+    contactLgaOfResidence = new ComboBox<>("Contact LGA of residence");
+    contactLgaOfResidence.setPlaceholder("Select LGA");
+    contactLgaOfResidence.setRequired(true);
+    contactLgaOfResidence.setRequiredIndicatorVisible(true);
 
-        contactResidentialAddress = new TextField("Contact residential address");
-        contactResidentialAddress.setPlaceholder("Enter Contact Address");
-        contactResidentialAddress.setRequired(true);
-        contactResidentialAddress.setRequiredIndicatorVisible(true);
+    contactWardOfResidence = new ComboBox<>("Contact ward of residence");
+    contactWardOfResidence.setPlaceholder("Select Ward");
+    contactWardOfResidence.setRequired(true);
+    contactWardOfResidence.setRequiredIndicatorVisible(true);
 
-        relationshipWithCase = new ComboBox<>("Relationship with case");
-        relationshipWithCase.setItems(relationshipWithCaseData);
-        relationshipWithCase.setPlaceholder("Select Relationship");
-        relationshipWithCase.setRequired(true);
-        relationshipWithCase.setRequiredIndicatorVisible(true);
+    contactStateOfResidence.addValueChangeListener(e -> {
+      String selectedState = e.getValue();
+      List<String> lgas = lgaData.getOrDefault(selectedState, Collections.emptyList());
+      contactLgaOfResidence.setItems(lgas);
+      contactWardOfResidence.setItems(lgas);
+      contactLgaOfResidence.clear();
+      contactWardOfResidence.clear();
+    });
 
-        form.add(
-                contactFirstName,
-                contactLastName,
-                contactDateOfBirth,
-                contactAgeYears,
-                contactAgeMonths,
-                contactSex,
-                contactStateOfResidence,
-                contactLgaOfResidence,
-                contactWardOfResidence,
-                contactResidentialAddress,
-                relationshipWithCase
-        );
+    contactResidentialAddress = new TextField("Contact residential address");
+    contactResidentialAddress.setPlaceholder("Enter Contact Address");
+    contactResidentialAddress.setRequired(true);
+    contactResidentialAddress.setRequiredIndicatorVisible(true);
 
-        return form;
-    }
+    // Listener to calculate and set age
+    contactDateOfBirth.addValueChangeListener(event -> {
+      LocalDate dob = event.getValue();
+      if (dob != null) {
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(dob, today);
+
+        int years = period.getYears();
+        int months = period.getMonths();
+        contactAgeYears.setValue(String.valueOf(years));
+        contactAgeMonths.setValue(String.valueOf(months));
+      } else {
+        contactAgeYears.clear();
+        contactAgeMonths.clear();
+      }
+    });
+
+    relationshipWithCase = new ComboBox<>("Relationship with case");
+    relationshipWithCase.setItems(relationshipWithCaseData);
+    relationshipWithCase.setPlaceholder("Select Relationship");
+    relationshipWithCase.setRequired(true);
+    relationshipWithCase.setRequiredIndicatorVisible(true);
+
+    form.add(
+        contactFirstName,
+        contactLastName,
+        contactDateOfBirth,
+        contactAgeYears,
+        contactAgeMonths,
+        contactSex,
+        contactStateOfResidence,
+        contactLgaOfResidence,
+        contactWardOfResidence,
+        contactResidentialAddress,
+        relationshipWithCase);
+
+    return form;
+  }
 }

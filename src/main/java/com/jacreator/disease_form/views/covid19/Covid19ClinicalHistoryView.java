@@ -77,8 +77,8 @@ private RadioButtonGroup<String> fever;
                 lossSmell,
                 lossTaste,
                 redEyes,
-                otherSymptoms,
-                dateOfSymptomOnset
+                dateOfSymptomOnset,
+                otherSymptoms
         );
 
         return form;
