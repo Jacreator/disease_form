@@ -2,6 +2,10 @@ package com.jacreator.disease_form.views;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -11,6 +15,16 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
 
 public class PatientView extends VerticalLayout {
+private Map<String, List<String>> wardData = new HashMap<String, List<String>>() {
+    {
+      put("AMAC", Arrays.asList("City Centre", "Garki", "Kabusa", "Wuse", "Gwarinpa"));
+      put("Bwari", Arrays.asList("Bwari Central", "Kuduru", "Igu", "Shere", "Kawu", "Ushafa"));
+      put("KUJE", Arrays.asList("Kuje", "Chibiri", "Gaube", "Kwaku"));
+      put("Nsukka", Arrays.asList("IBEKU", "ALOR-UNO", "EDE-UKWU", "EDE-NTA", "EDEM-ANI"));
+      put("Enugu South", Arrays.asList("Akwuke", "Amechi I", "Achara Layout East", "Achara Layout West"));
+      put("Udi", Arrays.asList("Oghu", "Affa", "Okpatu", "Awhum", "Ukana", "Abor"));
+    }
+  };
 
   public PatientView() {
     setWidthFull();
@@ -53,7 +67,7 @@ public class PatientView extends VerticalLayout {
       }
     });
 
-    TextField wardOfResidence = new TextField("Ward of residence");
+    ComboBox<String> wardOfResidence = new ComboBox<>("Ward of residence");
     wardOfResidence.setRequired(true);
 
     TextField address = new TextField("Patient’s residential address");
@@ -103,6 +117,16 @@ public class PatientView extends VerticalLayout {
         age.setValue(ageText.toString());
       } else {
         age.clear();
+      }
+    });
+
+    lgaOfResidence.addValueChangeListener(e -> {
+      String lga = e.getValue();
+      if (lga != null && wardData.containsKey(lga)) {
+        wardOfResidence.setItems(wardData.get(lga));
+      } else {
+        wardOfResidence.clear();
+        wardOfResidence.setItems();
       }
     });
 
