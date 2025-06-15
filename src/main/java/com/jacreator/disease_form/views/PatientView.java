@@ -1,6 +1,7 @@
 package com.jacreator.disease_form.views;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
@@ -9,7 +10,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
 
-public class PatientView extends VerticalLayout{
+public class PatientView extends VerticalLayout {
 
   public PatientView() {
     setWidthFull();
@@ -18,7 +19,7 @@ public class PatientView extends VerticalLayout{
   }
 
   private FormLayout buildForm() {
-// Patient Information Form
+    // Patient Information Form
     FormLayout patientForm = new FormLayout();
     TextField cardNumber = new TextField("Card Number");
     cardNumber.setRequired(true);
@@ -75,6 +76,17 @@ public class PatientView extends VerticalLayout{
     DatePicker dateOfOnset = new DatePicker("Date of onset");
     dateOfOnset.setMax(LocalDate.now());
     dateOfOnset.setRequired(true);
+
+    // Listener to calculate and set age
+    dateOfBirth.addValueChangeListener(event -> {
+      LocalDate dob = event.getValue();
+      if (dob != null) {
+        int years = Period.between(dob, LocalDate.now()).getYears();
+        age.setValue(String.valueOf(years));
+      } else {
+        age.clear();
+      }
+    });
 
     patientForm.setResponsiveSteps(
         new FormLayout.ResponsiveStep("0", 1),

@@ -1,6 +1,7 @@
 package com.jacreator.disease_form.views.yellow_fever;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -100,6 +101,23 @@ public class YellowFeverContactTracingView extends VerticalLayout {
     relationshipWithCase.setItems(RELATIONSHIP_WITH_CASE);
     relationshipWithCase.setPlaceholder("Select Relationship");
     relationshipWithCase.setRequired(true);
+
+    // Listener to calculate and set age
+    contactDateOfBirth.addValueChangeListener(event -> {
+      LocalDate dob = event.getValue();
+      if (dob != null) {
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(dob, today);
+
+        int years = period.getYears();
+        int months = period.getMonths();
+        contactAgeYears.setValue(String.valueOf(years));
+        contactAgeMonths.setValue(String.valueOf(months));
+      } else {
+        contactAgeYears.clear();
+        contactAgeMonths.clear();
+      }
+    });
 
     form.setResponsiveSteps(
         new FormLayout.ResponsiveStep("0", 1),
