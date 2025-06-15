@@ -82,7 +82,7 @@ public class PatientView extends VerticalLayout{
         new FormLayout.ResponsiveStep("700px", 3));
     // Add fields to form
     patientForm.add(
-        cardNumber, diseaseRadio, firstName, middleName, lastName,
+        cardNumber, firstName, middleName, lastName,
         stateOfResidence, lgaOfResidence, wardOfResidence, address,
         treatmentCenter, dateOfBirth, age, sex, dateOfOnset);
 
