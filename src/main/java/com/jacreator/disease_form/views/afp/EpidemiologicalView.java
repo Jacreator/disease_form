@@ -43,7 +43,7 @@ public class EpidemiologicalView extends VerticalLayout {
 
     TextField helpHistory1 = new TextField(
         "Where has the child been seeking help for this problem before presenting at present place");
-    DatePicker helpHistoryDate1 = new DatePicker("Date (1)");
+    
 
     form.setResponsiveSteps(
         new FormLayout.ResponsiveStep("0", 1),
@@ -52,7 +52,7 @@ public class EpidemiologicalView extends VerticalLayout {
     form.add(
         polioVaccineStatus, numberOfDoses, vaccinationHistory, opvRiNumber, opvSiaNumber,
         ipvRiNumber, ipvSiaNumber, ipvDoseDate, opvDoseDate,
-        helpHistory1, helpHistoryDate1);
+        helpHistory1);
 
     // AccordionPanel panel = accordion.add("Epidemiological Information", form);
     add(form);

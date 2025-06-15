@@ -59,10 +59,10 @@ public class LassaFeverContactTracingView extends VerticalLayout {
     ageYears.setTooltipText("Estimated Years");
     ageYears.setEnabled(false);
 
-    TextField ageMonths = new TextField("Age (Months)");
-    ageMonths.setPlaceholder("Estimated Months");
-    ageMonths.setTooltipText("Estimated Months");
-    ageMonths.setEnabled(false);
+    // TextField ageMonths = new TextField("Age (Months)");
+    // ageMonths.setPlaceholder("Estimated Months");
+    // ageMonths.setTooltipText("Estimated Months");
+    // ageMonths.setEnabled(false);
 
     // Phone Number
     TextField phone = new TextField("Phone Number");
@@ -105,11 +105,23 @@ public class LassaFeverContactTracingView extends VerticalLayout {
 
         int years = period.getYears();
         int months = period.getMonths();
-        ageYears.setValue(String.valueOf(years));
-        ageMonths.setValue(String.valueOf(months));
+
+        StringBuilder ageText = new StringBuilder();
+        if (years > 0) {
+          ageText.append(years).append(" year").append(years > 1 ? "s" : "");
+        }
+        if (months > 0) {
+          if (ageText.length() > 0)
+            ageText.append(", ");
+          ageText.append(months).append(" month").append(months > 1 ? "s" : "");
+        }
+        if (ageText.length() == 0) {
+          ageText.append("Less than a month");
+        }
+
+        ageYears.setValue(ageText.toString());
       } else {
         ageYears.clear();
-        ageMonths.clear();
       }
     });
 
@@ -126,7 +138,6 @@ public class LassaFeverContactTracingView extends VerticalLayout {
         contactLastName,
         dateOfBirth,
         ageYears,
-        ageMonths,
         phone,
         contactStateOfResidence,
         contactLgaOfResidence,

@@ -16,7 +16,6 @@ public class CholeraFinalClassificationView extends VerticalLayout {
 
     // Final classification
     RadioButtonGroup<String> finalClassification = new RadioButtonGroup<>();
-    finalClassification.setLabel("Final classification");
     finalClassification.setItems("Confirmed", "Probable", "Not a case");
     finalClassification.setRequired(true);
 
@@ -25,7 +24,7 @@ public class CholeraFinalClassificationView extends VerticalLayout {
         new FormLayout.ResponsiveStep("600px", 2),
         new FormLayout.ResponsiveStep("700px", 3));
     // Add field to the form
-    form.add(finalClassification);
+    form.add(finalClassification, 3);
 
     return form;
   }

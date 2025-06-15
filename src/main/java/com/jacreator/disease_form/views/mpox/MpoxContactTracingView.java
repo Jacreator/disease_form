@@ -1,6 +1,7 @@
 package com.jacreator.disease_form.views.mpox;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -53,10 +54,10 @@ public class MpoxContactTracingView extends VerticalLayout {
     contactAgeYears.setRequired(true);
     contactAgeYears.setTooltipText("Estimated Years");
 
-    TextField contactAgeMonths = new TextField();
-    contactAgeMonths.setPlaceholder("Estimated Months");
-    contactAgeMonths.setTooltipText("Estimated Months");
-    contactAgeMonths.setEnabled(false);
+    // TextField contactAgeMonths = new TextField();
+    // contactAgeMonths.setPlaceholder("Estimated Months");
+    // contactAgeMonths.setTooltipText("Estimated Months");
+    // contactAgeMonths.setEnabled(false);
 
     // Contact sex
     RadioButtonGroup<String> contactSex = new RadioButtonGroup<>();
@@ -100,6 +101,35 @@ public class MpoxContactTracingView extends VerticalLayout {
     relationshipWithCase.setRequired(true);
     relationshipWithCase.setPlaceholder("Select Relationship");
 
+// Listener to calculate and set age
+    contactDateOfBirth.addValueChangeListener(event -> {
+      LocalDate dob = event.getValue();
+      if (dob != null) {
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(dob, today);
+
+        int years = period.getYears();
+        int months = period.getMonths();
+
+        StringBuilder ageText = new StringBuilder();
+        if (years > 0) {
+          ageText.append(years).append(" year").append(years > 1 ? "s" : "");
+        }
+        if (months > 0) {
+          if (ageText.length() > 0)
+            ageText.append(", ");
+          ageText.append(months).append(" month").append(months > 1 ? "s" : "");
+        }
+        if (ageText.length() == 0) {
+          ageText.append("Less than a month");
+        }
+
+        contactAgeYears.setValue(ageText.toString());
+      } else {
+        contactAgeYears.clear();
+      }
+    });
+
     // Responsive steps
     form.setResponsiveSteps(
         new FormLayout.ResponsiveStep("0", 1),
@@ -112,7 +142,6 @@ public class MpoxContactTracingView extends VerticalLayout {
         contactLastName,
         contactDateOfBirth,
         contactAgeYears,
-        contactAgeMonths,
         contactSex,
         stateCombo,
         lgaCombo,

@@ -79,9 +79,9 @@ public class CSMContactTracingView extends VerticalLayout {
     // contactAgeYears.setPreventInvalidInput(true); // Method not available in
     // Vaadin TextField
 
-    contactAgeMonths = new TextField("Age (months)");
-    contactAgeMonths.setPlaceholder("Estimated Months");
-    contactAgeMonths.setPattern("\\d*");
+    // contactAgeMonths = new TextField("Age (months)");
+    // contactAgeMonths.setPlaceholder("Estimated Months");
+    // contactAgeMonths.setPattern("\\d*");
 
     contactSex = new RadioButtonGroup<>("Contact sex");
     contactSex.setItems("male", "female");
@@ -127,11 +127,23 @@ public class CSMContactTracingView extends VerticalLayout {
 
         int years = period.getYears();
         int months = period.getMonths();
-        contactAgeYears.setValue(String.valueOf(years));
-        contactAgeMonths.setValue(String.valueOf(months));
+
+        StringBuilder ageText = new StringBuilder();
+        if (years > 0) {
+          ageText.append(years).append(" year").append(years > 1 ? "s" : "");
+        }
+        if (months > 0) {
+          if (ageText.length() > 0)
+            ageText.append(", ");
+          ageText.append(months).append(" month").append(months > 1 ? "s" : "");
+        }
+        if (ageText.length() == 0) {
+          ageText.append("Less than a month");
+        }
+
+        contactAgeYears.setValue(ageText.toString());
       } else {
         contactAgeYears.clear();
-        contactAgeMonths.clear();
       }
     });
 
@@ -146,7 +158,6 @@ public class CSMContactTracingView extends VerticalLayout {
         contactLastName,
         contactDateOfBirth,
         contactAgeYears,
-        contactAgeMonths,
         contactSex,
         contactStateOfResidence,
         contactLgaOfResidence,
