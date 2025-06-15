@@ -23,9 +23,9 @@ public class PatientView extends VerticalLayout{
     TextField cardNumber = new TextField("Card Number");
     cardNumber.setRequired(true);
 
-    RadioButtonGroup<String> diseaseRadio = new RadioButtonGroup<>();
-    diseaseRadio.setLabel("Disease");
-    diseaseRadio.setItems("Diphtheria", "Other");
+    // RadioButtonGroup<String> diseaseRadio = new RadioButtonGroup<>();
+    // diseaseRadio.setLabel("Disease");
+    // diseaseRadio.setItems("Diphtheria", "Other");
 
     TextField firstName = new TextField("First name");
     firstName.setRequired(true);
