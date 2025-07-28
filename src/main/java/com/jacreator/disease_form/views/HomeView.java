@@ -183,6 +183,7 @@ public class HomeView extends VerticalLayout {
       accordion.getChildren().forEach(component -> accordion.remove((AccordionPanel) component));
       accordion.add("Reporting Areas", new ReportingAreasView());
       accordion.add("Patient Information", new PatientView());
+      accordion.add("Rumour Log", new RumourLogView());
 
       String selectedDisease = e.getValue();
       if (selectedDisease == null) {
