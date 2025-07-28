@@ -52,8 +52,6 @@ public class RumourLogView extends VerticalLayout {
       // Here, collect and process form data as needed
     });
 
-    // submit.getStyle().set("margin-left", "auto");
-    // submit.getStyle().set("margin-right", "auto");
     setWidthFull();
     setJustifyContentMode(JustifyContentMode.CENTER);
     setAlignItems(Alignment.CENTER);
