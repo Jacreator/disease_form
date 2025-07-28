@@ -1,8 +1,5 @@
 package com.jacreator.disease_form.views;
 
-import com.vaadin.flow.theme.lumo.LumoUtility;
-
-import com.jacreator.disease_form.views.afp.AFPView;
 import com.jacreator.disease_form.views.afp.ClinicalHistoryView;
 import com.jacreator.disease_form.views.afp.EpidemiologicalView;
 import com.jacreator.disease_form.views.afp.FinalClassificationView;
@@ -39,13 +36,8 @@ import com.jacreator.disease_form.views.dengue.DengueEpidemiologicalView;
 import com.jacreator.disease_form.views.dengue.DengueFinalClassificationView;
 import com.jacreator.disease_form.views.dengue.DengueLaboratoryInformationView;
 import com.jacreator.disease_form.views.diphtheria.ComplicationsView;
-import com.jacreator.disease_form.views.diphtheria.DiphtheriaClinicalHistoryView;
-import com.jacreator.disease_form.views.diphtheria.DiphtheriaContactTracingView;
 import com.jacreator.disease_form.views.diphtheria.DiphtheriaCpostComplicationsView;
-import com.jacreator.disease_form.views.diphtheria.DiphtheriaEpidemiologicalView;
-import com.jacreator.disease_form.views.diphtheria.DiphtheriaFinalClassificationView;
 import com.jacreator.disease_form.views.diphtheria.DiphtheriaLabFindingsView;
-import com.jacreator.disease_form.views.diphtheria.DiphtheriaLaboratoryInformationView;
 import com.jacreator.disease_form.views.diphtheria.DiphtheriaManagementView;
 import com.jacreator.disease_form.views.diphtheria.DiphtheriaSignAndSymptoms;
 import com.jacreator.disease_form.views.diphtheria.DiphtheriaVitalSignsOnAdmission;
@@ -122,13 +114,11 @@ import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import java.util.HashMap;
@@ -183,7 +173,6 @@ public class HomeView extends VerticalLayout {
       accordion.getChildren().forEach(component -> accordion.remove((AccordionPanel) component));
       accordion.add("Reporting Areas", new ReportingAreasView());
       accordion.add("Patient Information", new PatientView());
-      accordion.add("Rumour Log", new RumourLogView());
 
       String selectedDisease = e.getValue();
       if (selectedDisease == null) {

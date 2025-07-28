@@ -8,24 +8,25 @@ import java.util.List;
 import java.util.Map;
 
 import com.jacreator.disease_form.component.LocalDateTimePicker;
+import com.vaadin.flow.component.accordion.Accordion;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.Route;
 
+@Route("rumour-log")
 public class RumourLogView extends VerticalLayout {
-
   private final List<String> Lgas = Arrays.asList("AMAC", "Bwari", "Kwali", "Nsukka", "Enugu south", "Udi");
-  private final List<String> sourceList = Arrays.asList("Observed", "Print and Media", "Facebook", "Twitter", "WhatsApp", "Other");
+  private final List<String> sourceList = Arrays.asList("Observed", "Print and Media", "Facebook", "Twitter",
+      "WhatsApp", "Other");
   private final List<String> diseaseEventList = Arrays.asList("Increasing", "Decreasing", "Static");
-
-  public RumourLogView() {
-    setWidthFull();
-
-    add(buildForm());
-  }
 
   private Map<String, List<String>> wardData = new HashMap<String, List<String>>() {
     {
@@ -37,6 +38,36 @@ public class RumourLogView extends VerticalLayout {
       put("Udi", Arrays.asList("Oghu", "Affa", "Okpatu", "Awhum", "Ukana", "Abor"));
     }
   };
+
+  public RumourLogView() {
+    setWidthFull();
+    // Add beautiful title
+    H1 title = new H1("Rumour Log");
+    title.addClassName("page-title");
+    add(title);
+
+    // Submit button
+    Button submit = new Button("Submit form", event -> {
+      Notification.show("Form submitted!");
+      // Here, collect and process form data as needed
+    });
+
+    // submit.getStyle().set("margin-left", "auto");
+    // submit.getStyle().set("margin-right", "auto");
+    setWidthFull();
+    setJustifyContentMode(JustifyContentMode.CENTER);
+    setAlignItems(Alignment.CENTER);
+    setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+
+    submit.addClassName("blue-submit");
+    HorizontalLayout buttonLayout = new HorizontalLayout(submit);
+    buttonLayout.setWidthFull();
+    buttonLayout.setJustifyContentMode(JustifyContentMode.END);
+    buttonLayout.setPadding(false);
+    buttonLayout.setSpacing(false);
+
+    add(title, buildForm(), buttonLayout);
+  }
 
   private FormLayout buildForm() {
     FormLayout form = new FormLayout();
@@ -119,10 +150,22 @@ public class RumourLogView extends VerticalLayout {
       String lga = e.getValue();
       if (lga != null && wardData.containsKey(lga)) {
         wardOfResidence.setItems(wardData.get(lga));
-        communityComboBox.setVisible(true);
       } else {
         wardOfResidence.clear();
         wardOfResidence.setItems();
+      }
+    });
+
+    // Show community field when a ward is selected
+    wardOfResidence.addValueChangeListener(e -> {
+      String ward = e.getValue();
+      if (ward != null && !ward.isEmpty()) {
+        communityComboBox.setVisible(true);
+        // Optionally, you can set a default value or clear the field
+        communityComboBox.clear();
+      } else {
+        communityComboBox.setVisible(false);
+        communityComboBox.clear();
       }
     });
 
